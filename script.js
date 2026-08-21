@@ -1,0 +1,4 @@
+
+const menuButton=document.querySelector('.menu-button');const nav=document.querySelector('.nav');if(menuButton&&nav){menuButton.addEventListener('click',()=>{const open=nav.classList.toggle('open');menuButton.setAttribute('aria-expanded',String(open))});nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');menuButton.setAttribute('aria-expanded','false')}))}
+const year=document.getElementById('year');if(year)year.textContent=new Date().getFullYear();
+const buttons=[...document.querySelectorAll('.category-button')];const cards=[...document.querySelectorAll('.recipe-card')];buttons.forEach(button=>button.addEventListener('click',()=>{const cat=button.dataset.category;buttons.forEach(b=>b.classList.toggle('active',b===button));cards.forEach(card=>{card.hidden=cat!=='All'&&card.dataset.category!==cat})}));
