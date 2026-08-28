@@ -1,0 +1,124 @@
+FOOD BLOG — SAFE GIT UPLOAD WORKFLOW
+====================================
+
+Local website folder:
+~/Documents/food-blog
+
+GitHub Pages site:
+https://fresh-baguette.github.io/food-blog/
+
+
+NORMAL UPLOAD
+-------------
+
+1. Go to the website folder:
+
+cd ~/Documents/food-blog
+
+
+2. Check what changed:
+
+git status
+
+
+3. Stage all intended changes:
+
+git add -A
+
+
+4. CHECK AGAIN before committing:
+
+git status
+
+Make sure you only see the files you intended to add/change.
+
+IMPORTANT:
+- If you see lots of old JPGs, videos, or other files marked as deleted, STOP.
+- Do not commit until the unexpected deletions are fixed.
+
+
+5. Commit the changes:
+
+git commit -m "Describe the update"
+
+Example:
+
+git commit -m "Add universal discard dough"
+
+
+6. Upload to GitHub:
+
+git push
+
+
+7. Confirm everything is clean:
+
+git status
+
+You want to see:
+
+nothing to commit, working tree clean
+
+
+ADDING ONLY SPECIFIC FILES
+--------------------------
+
+Instead of:
+
+git add -A
+
+you can stage only selected files, for example:
+
+git add index.html
+git add script.js
+git add recipes/universal-discard-dough.html
+git add assets/images/universal-discard-dough-*.jpg
+
+Then check:
+
+git status
+
+and commit/push as usual.
+
+
+IF YOU ACCIDENTALLY STAGE A FILE
+--------------------------------
+
+If you staged something but have NOT committed yet:
+
+git restore --staged filename
+
+Example:
+
+git restore --staged accidental-file.zip
+
+If you already deleted the unwanted file locally, you can also refresh the staging area with:
+
+git add -A
+
+Then check:
+
+git status
+
+
+SAFE HABITS
+-----------
+
+- Edit the website on the Mac, then push to GitHub.
+- Avoid editing the same files directly on GitHub.
+- Do not run git pull unless you know the remote has changes you need.
+- Do not use git reset --hard, git clean -fd, or git push --force during normal uploads.
+- Always run git status before AND after git add.
+- Never commit if unexpected files are marked deleted.
+
+
+QUICK VERSION
+-------------
+
+cd ~/Documents/food-blog
+git status
+git add -A
+git status
+git commit -m "Describe the update"
+git push
+git status
