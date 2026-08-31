@@ -1,4 +1,4 @@
-FOOD BLOG — SAFE GIT UPLOAD WORKFLOW
+giFOOD BLOG — SAFE GIT UPLOAD WORKFLOW
 ====================================
 
 Local website folder:
