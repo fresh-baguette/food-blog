@@ -1,4 +1,54 @@
 // ========================================
+// Site favicon
+// ========================================
+//
+// The favicon files live in the same folder as script.js.
+// This automatically finds that folder, whether the page is:
+//
+//   index.html
+//   recipes/light-moussaka.html
+//   recipes/zurek.html
+//   etc.
+//
+// Therefore no favicon code has to be added to individual HTML files.
+// ========================================
+
+const siteScript = document.currentScript;
+
+if (siteScript) {
+    const siteRoot = new URL('.', siteScript.src);
+
+    const faviconFiles = [
+        {
+            rel: 'icon',
+            href: new URL('favicon.ico', siteRoot).href,
+            sizes: 'any'
+        },
+        {
+            rel: 'icon',
+            href: new URL('favicon-48x48.png', siteRoot).href,
+            type: 'image/png',
+            sizes: '48x48'
+        },
+        {
+            rel: 'apple-touch-icon',
+            href: new URL('apple-touch-icon.png', siteRoot).href
+        }
+    ];
+
+    faviconFiles.forEach((settings) => {
+        const link = document.createElement('link');
+
+        Object.entries(settings).forEach(([name, value]) => {
+            link.setAttribute(name, value);
+        });
+
+        document.head.appendChild(link);
+    });
+}
+
+
+// ========================================
 // Mobile navigation
 // ========================================
 
@@ -43,7 +93,7 @@ if (year) {
 // Recipe category filters
 // ========================================
 //
-// A recipe may belong to one OR several categories.
+// Multiple categories are allowed.
 //
 // Examples:
 //
@@ -52,8 +102,7 @@ if (year) {
 // data-category="Side/Main"
 // data-category="Side, Main"
 //
-// A Side/Main recipe will appear under both
-// the Side and Main filters.
+// All three multi-category forms above behave the same way.
 // ========================================
 
 const categoryButtons = [
@@ -65,7 +114,7 @@ const recipeCards = [
 ];
 
 
-// Turn the data-category text into a list.
+// Convert a card's category string into separate categories.
 //
 // "Side"       -> ["Side"]
 // "Side Main"  -> ["Side", "Main"]
@@ -83,7 +132,8 @@ categoryButtons.forEach((button) => {
     button.addEventListener('click', () => {
         const selectedCategory = button.dataset.category;
 
-        // Mark only the selected button as active.
+        // Highlight only the selected category button.
+
         categoryButtons.forEach((otherButton) => {
             otherButton.classList.toggle(
                 'active',
@@ -91,7 +141,8 @@ categoryButtons.forEach((button) => {
             );
         });
 
-        // Show cards matching the selected category.
+        // Show only recipes belonging to the selected category.
+
         recipeCards.forEach((card) => {
             const categories = getCategories(card);
 
