@@ -154,3 +154,23 @@ categoryButtons.forEach((button) => {
         });
     });
 });
+
+
+// ========================================
+// Last updated
+// ========================================
+
+const lastUpdated = document.getElementById('last-updated');
+
+if (lastUpdated) {
+    const modified = new Date(document.lastModified);
+
+    lastUpdated.textContent = modified.toLocaleDateString(
+        'en-US',
+        {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        }
+    );
+}
